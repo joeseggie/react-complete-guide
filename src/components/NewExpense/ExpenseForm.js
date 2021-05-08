@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
     const [enteredTitle, setEnteredTitle] = useState("");
     const [enteredAmount, setEnteredAmount] = useState("");
@@ -19,16 +19,21 @@ const ExpenseForm = () => {
         setEnteredDate(event.target.value);
     };
 
+    const getRandomId = () => {
+        return Math.floor(Math.random() * (99 - 9 + 1) + 9);
+    };
+
     const submitHandler = event => {
         event.preventDefault();
 
         const expenseData = {
+            id: getRandomId(),
             title: enteredTitle,
             amount: enteredAmount,
             date: new Date(enteredDate)
         };
 
-        console.log(expenseData);
+        props.onSubmit(expenseData);
 
         setEnteredTitle("");
         setEnteredAmount("");

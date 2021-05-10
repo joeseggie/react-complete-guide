@@ -19,15 +19,10 @@ const ExpenseForm = (props) => {
         setEnteredDate(event.target.value);
     };
 
-    const getRandomId = () => {
-        return Math.floor(Math.random() * (99 - 9 + 1) + 9);
-    };
-
     const submitHandler = event => {
         event.preventDefault();
 
         const expenseData = {
-            id: getRandomId(),
             title: enteredTitle,
             amount: enteredAmount,
             date: new Date(enteredDate)
@@ -70,6 +65,7 @@ const ExpenseForm = (props) => {
                 </div>
             </div>
             <div className="new-expense__actions">
+                <button type="button" onClick={props.onCancel}>Cancel</button>
                 <button type="submit">Add Expense</button>
             </div>
         </form>
